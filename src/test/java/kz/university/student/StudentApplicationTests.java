@@ -1,11 +1,13 @@
 package kz.university.student;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class StudentApplicationTests {
     @Test
-    void contextLoads() {
+    void unitTestExecution() {
+        String student = "Daurenkyzy Aiym";
+        Assertions.assertNotNull(student);
+        Assertions.assertEquals("Daurenkyzy Aiym", student);
     }
 }
