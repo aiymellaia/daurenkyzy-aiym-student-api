@@ -1,0 +1,28 @@
+==========================================
+STUDENT SYSTEM REPORT
+Student Full Name: Daurenkyzy Aiym
+Execution Date/Time: 2026-10-29 12:12:51
+Current User: aiyme
+------------------------------------------
+OS & Kernel Version:
+Linux Redfish 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+------------------------------------------
+CPU Information:
+CPU(s):                               12
+Model name:                           AMD Ryzen 5 5600H with Radeon Graphics
+Thread(s) per core:                   2
+NUMA node0 CPU(s):                    0-11
+------------------------------------------
+Memory Information:
+               total        used        free      shared  buff/cache   available
+Mem:           7.4Gi       533Mi       6.9Gi       3.6Mi       158Mi       6.9Gi
+Swap:          2.0Gi          0B       2.0Gi
+------------------------------------------
+Disk Usage:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G  2.4G  954G   1% /
+------------------------------------------
+Available Disk Space on Root:
+954G
+==========================================
