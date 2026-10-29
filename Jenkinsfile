@@ -18,33 +18,21 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Building application via Gradle container..."
-                sh '''
-                    docker run --rm \
-                      -v "$WORKSPACE":/home/gradle/project \
-                      -w /home/gradle/project \
-                      gradle:8.7-jdk21-alpine \
-                      gradle clean compileJava --no-daemon
-                '''
+                echo "Building application inside multi-stage Docker builder..."
+                sh "docker build --target builder -t ${env.DOCKER_IMAGE_NAME}:build-cache ."
             }
         }
 
         stage('Test') {
             steps {
-                echo "Running unit tests via Gradle container..."
-                sh '''
-                    docker run --rm \
-                      -v "$WORKSPACE":/home/gradle/project \
-                      -w /home/gradle/project \
-                      gradle:8.7-jdk21-alpine \
-                      gradle test --no-daemon
-                '''
+                echo "Running unit tests inside Docker build environment..."
+                sh "docker run --rm ${env.DOCKER_IMAGE_NAME}:build-cache gradle test --no-daemon"
             }
         }
 
         stage('Docker Build') {
             steps {
-                echo "Building Docker image ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}..."
+                echo "Packaging runtime Docker image ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}..."
                 sh "docker build -t ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
             }
         }
