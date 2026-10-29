@@ -18,16 +18,27 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Building application..."
-                sh 'chmod +x gradlew || true'
-                sh './gradlew clean compileJava --no-daemon || gradle clean compileJava'
+                echo "Building application via Gradle container..."
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE":/home/gradle/project \
+                      -w /home/gradle/project \
+                      gradle:8.7-jdk21-alpine \
+                      gradle clean compileJava --no-daemon
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                echo "Running tests..."
-                sh './gradlew test --no-daemon || gradle test'
+                echo "Running unit tests via Gradle container..."
+                sh '''
+                    docker run --rm \
+                      -v "$WORKSPACE":/home/gradle/project \
+                      -w /home/gradle/project \
+                      gradle:8.7-jdk21-alpine \
+                      gradle test --no-daemon
+                '''
             }
         }
 
